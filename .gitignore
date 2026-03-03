@@ -1,12 +1,29 @@
-# Released paket - Google Drive'dan indirilen büyük dosyalar
-released/
+# ============================================
+# Released paket - seçici ignore stratejisi
+# Küçük kod dosyaları git'e gider, büyük model/binary dosyalar ignore
+# ============================================
 
-# Python
-__pycache__/
-*.py[cod]
-*.so
+# --- BÜYÜK KLASÖRLER (tamamen ignore) ---
+# DFDN checkpoints - 3.5 GB model ağırlıkları
+released/DFDN/checkpoints/
 
-# Model weights & checkpoints
+# Proxy - 1 GB (BFM model, binary, dll)
+released/proxy/
+
+# Landmarks - 953 MB (OpenFace native libs, model dosyaları)
+released/landmarks/
+
+# renderTexture - 86 MB (DLL dosyaları)
+released/renderTexture/
+
+# emotion - 28 MB (h5 model)
+released/emotion/
+
+# Test sonuçları - git'e gitmez
+released/results/
+released/results_*/
+
+# --- BÜYÜK DOSYA TÜRLERİ (genel) ---
 *.pth
 *.onnx
 *.pt
@@ -14,6 +31,25 @@ __pycache__/
 *.h5
 *.pkl
 *.npy
+*.dat
+*.lib
+*.dll
+*.exe
+*.a
+*.npz
+
+# --- GIT'E GİDECEKLER (ignore DEĞİL) ---
+# released/DFDN/models/*.py, options/*.py, util/*.py (kod)
+# released/DFDN/areas.mat, project.mat
+# released/facialDetails.py
+# released/proxyPredictor.py
+# released/faceRender/ (shader dosyaları)
+# released/samples/ (test resimleri)
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
 
 # IDE
 .vscode/
