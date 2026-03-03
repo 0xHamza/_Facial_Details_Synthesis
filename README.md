@@ -1,4 +1,92 @@
 
+# Facial Details Synthesis — Windows 11 Setup & Usage (2026)
+
+> **Fork:** [0xHamza/_Facial_Details_Synthesis](https://github.com/0xHamza/_Facial_Details_Synthesis) (upstream: [apchenstu/Facial_Details_Synthesis](https://github.com/apchenstu/Facial_Details_Synthesis))  
+> **OS:** Windows 11 (x64) | **GPU:** NVIDIA RTX4060 (CUDA 10+)  
+> **Last tested:** March 3, 2026 — Pipeline working (UV isomap + displacement + normal map)
+
+## Quick Setup
+
+```bash
+# 1. Create conda env (env_facial_details.yml is included in the repo)
+conda env create -f env_facial_details.yml
+conda activate facial_details
+
+# 2. Download large files (~5.5 GB, NOT in git)
+#    Full guide: RELEASED_SETUP.md
+#    - Released v0.1.0 package → extract to released/
+#    - DFDN checkpoints → released/DFDN/checkpoints/
+#    - Landmark models → released/landmarks/
+#    - BFM2017 model → released/proxy/bfm2017/model2017-1_bfm_nomouth.h5
+
+# 3. Generate BFM2017 .bin file (WITH UV — required for proper output)
+cd released/proxy/bfm2017
+pip install --force-reinstall eos-py==0.16.1
+python convert-bfm2017-to-eos-v016.py          # generates UV-enabled .bin (default)
+# python convert-bfm2017-to-eos-v016.py --no-uv  # without UV (isomap will be black)
+```
+
+## Usage
+
+```bash
+cd released/
+
+# Single image — proxy + UV isomap + displacement + normal map
+# NOTE: Single image auto-opens the 3D viewer GUI (hmrenderer.exe).
+#       Close the viewer window to continue.
+python facialDetails.py -i ./samples/details/019615.jpg -o ./results
+
+# Batch (folder) — processes all images WITHOUT opening GUI
+python facialDetails.py -i ./samples/details -o ./results
+
+# TIP: To process a single image WITHOUT GUI, put it in a folder:
+#   mkdir temp && copy image.jpg temp/
+#   python facialDetails.py -i ./temp -o ./results
+
+# Proxy only (no detail synthesis, faster)
+python proxyPredictor.py -i ./samples/proxy -o ./results
+
+# With FAC expression prior (enabled by default)
+python proxyPredictor.py -i ./samples/proxy -o ./results --FAC 1
+
+# With emotion prior (requires keras/tensorflow)
+python proxyPredictor.py -i ./samples/proxy -o ./results --emotion 1
+```
+
+## Output
+
+Each image produces a `results/<name>/` folder with:
+
+| File | Description |
+|------|-------------|
+| `result.obj` | 3D proxy mesh (53K vertices, UV-mapped) |
+| `result.isomap.png` | UV texture map (4096×4096, face texture) |
+| `result.displacementmap.png` | Displacement map (4096×4096, uint16, wrinkle details) |
+| `result.normalmap.png` | Normal map (4096×4096, surface details) |
+| `result.mtl` | Material file |
+| `*.pts`, `*.txt`, `*.box` | Landmark and expression data |
+
+## UV Issue & Fix
+
+The original released package ships a BFM2017 `.bin` without UV coordinates — this is a packaging oversight. Without UV, the isomap is black and displacement maps are flat. Fix: regenerate `.bin` with UV using `convert-bfm2017-to-eos-v016.py`. Details: [ANALIZ_UV_SORUNU.md](ANALIZ_UV_SORUNU.md)
+
+## Documentation
+
+| File | Content |
+|------|---------|
+| [RELEASED_SETUP.md](RELEASED_SETUP.md) | Download links, DLL inventory, missing file guide |
+| [ANALIZ_UV_SORUNU.md](ANALIZ_UV_SORUNU.md) | UV issue analysis and fix |
+| [PIPELINE_ANALIZ.md](PIPELINE_ANALIZ.md) | Detailed 6-stage pipeline technical analysis |
+| [REPO_ANALIZ_RAPORU.md](REPO_ANALIZ_RAPORU.md) | Repo structure and dependency analysis |
+| [env_facial_details.yml](env_facial_details.yml) | Conda environment export (Python 3.7, PyTorch 1.13) |
+
+---
+
+# Original README (Upstream)
+
+> The content below is from the original [apchenstu/Facial_Details_Synthesis](https://github.com/apchenstu/Facial_Details_Synthesis) repository.
+
+---
 
 
 
