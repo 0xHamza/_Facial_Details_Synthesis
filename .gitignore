@@ -1,0 +1,24 @@
+# Released paket - Google Drive'dan indirilen büyük dosyalar
+released/
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Model weights & checkpoints
+*.pth
+*.onnx
+*.pt
+*.bin
+*.h5
+*.pkl
+*.npy
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
