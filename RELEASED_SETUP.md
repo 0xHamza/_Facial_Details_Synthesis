@@ -204,6 +204,119 @@ python proxyPredictor.py -i ./samples/proxy -o ./results
 
 ---
 
+## DLL & EXE Envanteri (Binary Dosyalar)
+
+Aşağıdaki tüm DLL ve EXE dosyaları **Released v0.1.0 paketi** ile birlikte gelmiştir. Pip veya başka bir paket yöneticisinden ayrıca indirilmeleri **gerekmez** — hepsi orijinal paketin parçasıdır. C++ ile derlenmiş modüllerin runtime bağımlılıklarıdır.
+
+### EXE Dosyaları (Derlenmiş Modüller)
+
+| Dosya | Boyut | Konum | Açıklama |
+|-------|------:|-------|----------|
+| `FaceLandmarkImg.exe` | 1.0 MB | `landmarks/` | OpenFace landmark dedektörü (CLM/CE-CLM) |
+| `hmrenderer.exe` | 0.7 MB | `faceRender/` | OpenGL yüz renderer (normal map görselleştirme) |
+| `fit-model.exe` | 0.6 MB | `proxy/` | EOS proxy mesh fitting (BFM2017 → OBJ) |
+| `faceClip.exe` | 0.1 MB | `renderTexture/` | UV isomap texture çıkarma (OpenGL) |
+
+### DLL Dosyaları — `proxy/` (55 MB, 21 DLL)
+
+| Dosya | Boyut | Kaynak / Açıklama |
+|-------|------:|-------------------|
+| `opencv_imgproc343.dll` | 24.2 MB | OpenCV 3.43 — görüntü işleme |
+| `opencv_core343.dll` | 20.2 MB | OpenCV 3.43 — çekirdek kütüphane |
+| `opencv_imgcodecs343.dll` | 0.3 MB | OpenCV 3.43 — resim codec'leri |
+| `IlmImf-2_2.dll` | 2.7 MB | OpenEXR — HDR görüntü I/O |
+| `Half.dll` | 0.3 MB | OpenEXR — half-precision float |
+| `Imath-2_2.dll` | 0.1 MB | OpenEXR — matematik |
+| `Iex-2_2.dll` | 0.1 MB | OpenEXR — exception handling |
+| `IlmThread-2_2.dll` | 0.04 MB | OpenEXR — threading |
+| `gdcmDICT.dll` | 1.5 MB | GDCM — DICOM sözlüğü |
+| `gdcmMSFF.dll` | 1.2 MB | GDCM — DICOM dosya formatı |
+| `gdcmDSED.dll` | 0.5 MB | GDCM — DICOM data set |
+| `gdcmIOD.dll` | 0.1 MB | GDCM — DICOM IOD |
+| `gdcmCommon.dll` | 0.1 MB | GDCM — ortak kütüphane |
+| `gdcmjpeg16.dll` | 0.2 MB | GDCM — JPEG 16-bit codec |
+| `gdcmjpeg12.dll` | 0.2 MB | GDCM — JPEG 12-bit codec |
+| `gdcmjpeg8.dll` | 0.2 MB | GDCM — JPEG 8-bit codec |
+| `gdcmcharls.dll` | 0.2 MB | GDCM — JPEG-LS codec |
+| `boost_program_options-vc141-mt-x64-1_68.dll` | 0.4 MB | Boost 1.68 — CLI argüman ayrıştırma |
+| `boost_filesystem-vc141-mt-x64-1_68.dll` | 0.1 MB | Boost 1.68 — dosya sistemi |
+| `boost_system-vc141-mt-x64-1_68.dll` | 0.04 MB | Boost 1.68 — sistem |
+| `cudart64_100.dll` | 0.4 MB | CUDA 10.0 Runtime (opsiyonel GPU desteği) |
+| `webp.dll` | 0.5 MB | libwebp — WebP görüntü codec |
+| `jpeg62.dll` | 0.4 MB | libjpeg — JPEG codec |
+| `jasper.dll` | 0.3 MB | JasPer — JPEG-2000 codec |
+| `openjp2.dll` | 0.3 MB | OpenJPEG — JPEG-2000 codec |
+| `libpng16.dll` | 0.2 MB | libpng — PNG codec |
+| `zlib1.dll` | 0.1 MB | zlib — sıkıştırma |
+| `expat.dll` | 0.1 MB | Expat — XML ayrıştırıcı |
+
+### DLL Dosyaları — `landmarks/` (148 MB, 13 DLL)
+
+| Dosya | Boyut | Kaynak / Açıklama |
+|-------|------:|-------------------|
+| `opencv_world410.dll` | 70.4 MB | OpenCV 4.10 — monolitik build (tüm modüller tek DLL) |
+| `openblas.dll` | 25.6 MB | OpenBLAS — lineer cebir (BLAS/LAPACK), x64 |
+| `lib/3rdParty/OpenBLAS/bin/x64/openblas.dll` | 25.6 MB | Aynı DLL'in build dizinindeki kopyası |
+| `lib/3rdParty/OpenBLAS/bin/x86/libopenblas.dll` | 20.5 MB | OpenBLAS x86 versiyonu (32-bit) |
+| `flang.dll` | 1.6 MB | LLVM Flang — Fortran runtime (OpenBLAS bağımlılığı) |
+| `lib/3rdParty/OpenBLAS/bin/x64/flang.dll` | 1.6 MB | Flang kopyası (build dizini) |
+| `libomp.dll` | 0.6 MB | LLVM OpenMP — paralel hesaplama |
+| `lib/3rdParty/OpenBLAS/bin/x64/libomp.dll` | 0.6 MB | OpenMP kopyası (build dizini) |
+| `flangrti.dll` | 0.04 MB | Flang runtime interface |
+| `lib/3rdParty/OpenBLAS/bin/x64/flangrti.dll` | 0.04 MB | Flangrti kopyası |
+| `lib/3rdParty/OpenBLAS/bin/x86/libgfortran-3.dll` | 1.0 MB | GNU Fortran runtime (x86) |
+| `lib/3rdParty/OpenBLAS/bin/x86/libgcc_s_sjlj-1.dll` | 0.5 MB | GCC runtime (x86) |
+| `lib/3rdParty/OpenBLAS/bin/x86/libquadmath-0.dll` | 0.3 MB | GNU quad-precision math (x86) |
+
+> **Not:** `landmarks/lib/3rdParty/` altındaki DLL'ler OpenFace build artıklarıdır. Runtime'da `landmarks/` root'taki DLL'ler kullanılır.
+
+### DLL Dosyaları — `renderTexture/` (86 MB, 3 DLL)
+
+| Dosya | Boyut | Kaynak / Açıklama |
+|-------|------:|-------------------|
+| `opencv_world330.dll` | 85.7 MB | OpenCV 3.30 — monolitik build (isomap renderer) |
+| `glew32.dll` | 0.4 MB | GLEW — OpenGL Extension Wrangler |
+| `glfw3.dll` | 0.1 MB | GLFW — OpenGL pencere yönetimi |
+
+### Kaynak Özeti
+
+DLL/EXE dosyaları **şu kaynaklardan gelmiştir:**
+
+| Kaynak | İçerik | Nasıl Elde Edildi |
+|--------|--------|-------------------|
+| Released v0.1.0 paketi (Google Drive/OneDrive) | Tüm EXE'ler + DLL'ler | Orijinal paket ile birlikte geldi |
+| Landmark modelleri (ayrı indirme) | landmarks/ DLL'leri | Google Drive/OneDrive'dan ayrıca indirildi |
+
+> **⚠️ Önemli:** Bu DLL'ler Windows x64 için derlenmiştir. Linux/macOS desteği yoktur. Orijinal proje sadece Windows 10 desteklemektedir.
+
+### Eksik DLL Sorun Giderme
+
+Released paketi extract edildikten sonra bazı DLL'ler eksik kalabilir. Bu durumda aşağıdaki pip paketlerini kurarak ilgili DLL'leri sisteminize yükleyebilirsiniz:
+
+```bash
+# facial_details conda env'inde çalıştırın
+conda activate facial_details
+
+# OpenCV — opencv_world*.dll eksikse
+pip install opencv-python-headless==4.6.0.66
+
+# NumPy/SciPy — openblas.dll eksikse (numpy wheel içinde gelir)
+pip install numpy==1.21.5
+pip install scipy==1.7.3
+```
+
+> **Not:** Pip ile kurulan DLL'ler `site-packages/` altına yerleşir, `released/` klasörüne değil.
+> EXE dosyaları (`FaceLandmarkImg.exe`, `fit-model.exe`, vb.) kendi DLL'lerini **aynı klasörde** arar.
+> Bu yüzden released paketindeki DLL'ler pip kurulumundan bağımsız olarak **orada kalmalıdır**.
+> Pip kurulumu sadece Python scriptleri (`facialDetails.py`, `proxyPredictor.py`) için gereklidir.
+
+**DLL eksikliğinde hata örnekleri:**
+- `ImportError: DLL load failed` → İlgili pip paketini kurun
+- `The code execution cannot proceed because opencv_world410.dll was not found` → Released paketi düzgün extract edilmemiş, tekrar indirip çıkarın
+- `System.DllNotFoundException` → PATH'e released/ klasörlerini ekleyin veya DLL'leri EXE'nin yanına kopyalayın
+
+---
+
 ## İndirme Linkleri Özet Tablosu
 
 | Bileşen | Google Drive | OneDrive | Boyut |
