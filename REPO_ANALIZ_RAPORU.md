@@ -1,7 +1,7 @@
 # Repo Analiz Raporu: apchenstu/Facial_Details_Synthesis
 
 > **Analiz Tarihi:** 2 Mart 2026  
-> **Analiz Perspektifi:** Fiziksel vertex deformasyonu, detaylı mesh üretimi (Detaylı mesh projesi bağlamı)  
+> **Analiz Perspektifi:** Fiziksel vertex deformasyonu, detaylı mesh üretimi  
 > **Analiz Kaynakları:** Lokal klondaki kaynak kod incelemesi (released/ + src/), shader analizi, pipeline çalıştırma sonuçları, paper okuma, DeepWiki
 
 ---
@@ -253,10 +253,10 @@ Proxy + displacement iki aşamalı yerine, tek geçişte detaylı mesh üreten m
 
 ### Detaylı Mesh Projesi İçin Yeri
 
-Bu repo, Detaylı mesh projesinin ihtiyacı olan **"tek fotoğraftan detaylı mesh"** hedefini **mevcut haliyle karşılayamaz**. Ancak:
+Bu repo, **"tek fotoğraftan detaylı mesh"** hedefini **mevcut haliyle karşılayamaz**. Ancak:
 
 1. **Hammadde sağlayıcı olarak değerlendirilebilir:** 16-bit displacement map extract edip, Blender/trimesh ile mesh'e uygulama (displacement application) pipeline'ı eklenirse fiziksel geometri elde edilebilir.
-2. **Kavramsal referans:** "Proxy mesh + displacement detail" iki aşamalı yaklaşım, proje pipeline'ında da benzer şekilde kullanılabilir.
+2. **Kavramsal referans:** "Proxy mesh + displacement detail" iki aşamalı yaklaşım, downstream pipeline'larda benzer şekilde kullanılabilir.
 3. **Yetersiz displacement kalitesi:** 366 scan'lik eğitim verisi, 256×256 patch boyutu ve sadece 2 bölge coverage'ı → modern alternatiflere kıyasla zayıf.
 
 ### Önerilen Alternatif Projeler
