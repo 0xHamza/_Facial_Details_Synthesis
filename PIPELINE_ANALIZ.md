@@ -528,7 +528,7 @@ UV fix sonrasında pipeline düzgün çalışıyor. Ancak çıktılar:
 - `result.displacementmap.png`: Detay bilgisi (sadece PNG olarak)
 - `result.normalmap.png`: Render efekti (sadece PNG olarak)
 
-**detaylı mesh üretmek için:**
+**Detaylı mesh üretmek için:**
 1. Blender'da `result.obj` yükle
 2. Subdivision Surface modifier (2-4 seviye)
 3. Displace modifier → `result.displacementmap.png` texture olarak
